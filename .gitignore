@@ -1,0 +1,40 @@
+# Virtual environments
+myenv/
+venv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Environment variables
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (don't track user uploads)
+uploads/*
+
+# Large model files (add your large files here)
+model/
+backup/
+
+# Temporary files
+*.tmp
+*.temp

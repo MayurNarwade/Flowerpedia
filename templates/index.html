@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flowerpedia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Flowerpedia</div>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#care">Flower Care</a></li>
+      <li><a href="#gallery">Flower Gallery</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Discover the World of Flowers</h1>
+    <p>Upload an image to identify any flower instantly!</p>
+
+    <div class="upload-container">
+      <form method="POST" action="/predict" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageUpload" accept="image/*" required>
+        <button type="submit">Identify Flower</button>
+      </form>
+    </div>
+
+    {% if prediction %}
+    <div class="result">
+      <h3>Prediction Result</h3>
+      <div>
+        {% if flower_info.image_url %}
+        <img src="{{ flower_info.image_url }}" alt="{{ prediction }}" style="max-width: 300px; margin-top: 10px;">
+        {% else %}
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="{{ prediction }}" style="max-width: 300px; margin-top: 10px;">
+        {% endif %}
+        <h3>{{ prediction }}</h3>
+        <p><strong>Description:</strong> {{ flower_info.description }}</p>
+      </div>
+    </div>
+    {% elif error %}
+    <div class="error">
+      <p>{{ error }}</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- Flower Care Section -->
+  <section id="care" class="gallery">
+    <h2>Flower Care Tips</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <h3>Watering</h3>
+        <p>Water most flowers 1–2 times weekly, ensuring soil is moist but not waterlogged.</p>
+      </div>
+      <div class="gallery-item">
+        <h3>Sunlight</h3>
+        <p>Most flowers need 6–8 hours of sunlight daily; check specific needs.</p>
+      </div>
+      <div class="gallery-item">
+        <h3>Soil</h3>
+        <p>Use well-draining soil; add compost for nutrients.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <h2>Flower Gallery</h2>
+    <div id="galleryGrid" class="gallery-grid">
+      <!-- Dynamic Gallery Item for Predicted Flower -->
+      {% if flower_info and flower_info.common_name != "Unknown Flower" %}
+      <div class="gallery-item">
+        {% if flower_info.image_url %}
+        <img src="{{ flower_info.image_url }}" alt="{{ flower_info.common_name }}">
+        {% else %}
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="{{ flower_info.common_name }}">
+        {% endif %}
+        <h3>{{ flower_info.common_name }}</h3>
+        <p>{{ flower_info.description }}</p>
+      </div>
+      {% endif %}
+      <!-- Static Gallery Items -->
+      {% for name, info in gallery_data.items() %}
+      <div class="gallery-item">
+        {% if info.image_url %}
+        <img src="{{ info.image_url }}" alt="{{ name }}">
+        {% else %}
+        <img src="https://via.placeholder.com/150" alt="{{ name }}">
+        {% endif %}
+        <h3>{{ name }}</h3>
+        <p>{{ info.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Flowerpedia. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
