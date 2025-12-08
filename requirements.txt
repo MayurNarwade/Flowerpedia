@@ -1,9 +1,4 @@
 Flask
-Werkzeug
-Jinja2
 Pillow
-torch
-torchvision
-numpy
-requests
-gunicorn
+Werkzeug
+numpy==1.26.4

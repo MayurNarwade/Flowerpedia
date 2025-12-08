@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flowerpedia</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Flowerpedia</div>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#care">Flower Care</a></li>
+      <li><a href="#gallery">Flower Gallery</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Discover the World of Flowers</h1>
+    <p>Upload an image to identify any flower instantly!</p>
+
+    <div class="upload-container">
+      <form method="POST" action="/predict" enctype="multipart/form-data">
+        <input type="file" name="image" id="imageUpload" accept="image/*" required>
+        <button type="submit">Identify Flower</button>
+      </form>
+    </div>
+
+    {% if prediction %}
+    <div class="result">
+      <h3>Predicted Flower: {{ prediction }}</h3>
+      <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Uploaded Flower" style="max-width: 300px; margin-top: 10px;">
+    </div>
+    {% endif %}
+  </section>
+
+  <!-- Flower Care Section -->
+  <section id="care" class="gallery">
+    <h2>Flower Care Tips</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <h3>Watering</h3>
+        <p>Water most flowers 1-2 times weekly, ensuring soil is moist but not waterlogged.</p>
+      </div>
+      <div class="gallery-item">
+        <h3>Sunlight</h3>
+        <p>Most flowers need 6-8 hours of sunlight daily; check specific needs.</p>
+      </div>
+      <div class="gallery-item">
+        <h3>Soil</h3>
+        <p>Use well-draining soil; add compost for nutrients.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <h2>Flower Gallery</h2>
+    <div id="galleryGrid" class="gallery-grid">
+      <!-- Add flower images if needed -->
+    </div>
+  </section>
+
+</body>
+</html>

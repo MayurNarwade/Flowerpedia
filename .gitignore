@@ -1,4 +1,5 @@
 # Virtual environments
+py311env/
 myenv/
 venv/
 env/
@@ -6,35 +7,25 @@ env/
 
 # Python cache
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
+*.pyc
 
-# Jupyter Notebook
-.ipynb_checkpoints
-*.ipynb
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
 
-# Environment variables
-.env
-.env.local
+# Uploaded images
+uploads/
+static/uploads/
 
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
+# System & IDE files
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
 
-# Uploads (don't track user uploads)
-uploads/*
-
-# Large model files (add your large files here)
-model/
-backup/
-
-# Temporary files
+# Logs / temporary
+*.log
 *.tmp
 *.temp
+
+# Large model weights (optional)
+#model/state_dict.pth
