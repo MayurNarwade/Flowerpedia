@@ -183,8 +183,8 @@ def predict():
 
 
 # -----------------------------
-# 5. Local dev entrypoint
+# 5. Local dev / Render entrypoint
 # -----------------------------
 if __name__ == '__main__':
-    # For local testing only; Render will use `gunicorn app:app`
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
