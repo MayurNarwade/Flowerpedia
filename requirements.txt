@@ -3,3 +3,5 @@ Pillow
 Werkzeug
 numpy==1.26.4
 gunicorn
+torch
+torchvision
